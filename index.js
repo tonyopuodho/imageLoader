@@ -1,6 +1,6 @@
 const productContainer = document.querySelector(".product-container")
 const loadBtn = document.querySelector(".loadBtn")
-
+let current = 0
 async function fetchProducts(getCurrent){
     try {
         const apiResponse = await fetch(`https://dummyjson.com/products?limit=10&skip=${getCurrent === 0 ? 0 : getCurrent * 10}`)
@@ -38,9 +38,16 @@ function displayProducts(products){
         itemWrapper.appendChild(productDescription)
 
         productContainer.appendChild(itemWrapper)
-
     })
-   
+     
+    if (productContainer.children.length === 100) {
+            loadBtn.setAttribute("disabled","true")
+    }
+
 }
 
-fetchProducts()
+fetchProducts(current)
+
+loadBtn.addEventListener('click', () => {
+    fetchProducts(current += 1)
+})
