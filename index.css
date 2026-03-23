@@ -48,3 +48,6 @@ body{
     cursor: pointer;
     border-radius: 10px;
 }
+.loadBtn:disabled{
+    cursor: not-allowed;
+}
